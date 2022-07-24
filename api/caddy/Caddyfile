@@ -1,0 +1,16 @@
+# Disable auto HTTPS certs
+{
+    auto_https off
+}
+
+# The address of your server
+localhost:669
+
+route {
+    mercure {
+        publisher_jwt !ChangeMe!
+        subscriber_jwt !ChangeMe!
+    }
+
+    respond "Not Found" 404
+}

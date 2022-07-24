@@ -1,3 +1,5 @@
 /.env
 /helm/api-platform/charts/*
 !/helm/api-platform/charts/.gitignore
+api/caddy/caddy.exe
+api/caddy/mercure.db
