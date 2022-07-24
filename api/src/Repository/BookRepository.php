@@ -39,6 +39,10 @@ class BookRepository extends ServiceEntityRepository
         }
     }
 
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
 //    /**
 //     * @return Book[] Returns an array of Book objects
 //     */

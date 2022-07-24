@@ -27,7 +27,7 @@ class Book
     #[ORM\Column(type: Types::SMALLINT)]
     private ?int $pageCount = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $publishedDate = null;
 
     #[ORM\Column(length: 3000, nullable: true)]
