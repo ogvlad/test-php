@@ -3,7 +3,7 @@ import Head from "next/head";
 const AdminLoader = () => {
   if (typeof window !== "undefined") {
     const { HydraAdmin } = require("@api-platform/admin");
-    return <HydraAdmin entrypoint={window.origin} />;
+    return <HydraAdmin entrypoint="http://localhost:8000" />;
   }
 
   return <></>;

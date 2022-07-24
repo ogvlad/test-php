@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * This is a dummy entity. Remove it!
  */
-#[ApiResource(mercure: true)]
+#[ApiResource(mercure: false)]
 #[ORM\Entity]
 class Greeting
 {
