@@ -5,10 +5,8 @@ A sample PHP application powered by API Platform & Symfony
 ## Launching
 
 1. Run database
-2. Backend
-4. Build and run backend (includes API docs)
-4.1. 
-5. Buld and run frontend (Dashboard, Admin)
+2. Backend (REST API, Docs)
+3. Frontend (Website, Admin)
 
 ## Run database
 
