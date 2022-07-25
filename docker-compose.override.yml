@@ -2,7 +2,7 @@ version: "3.4"
 
 # Development environment override
 services:
-  php:
+  backend:
     volumes:
       - ./api:/srv/api:rw,cached
       - ./api/docker/php/conf.d/api-platform.dev.ini:/usr/local/etc/php/conf.d/api-platform.ini
@@ -11,19 +11,12 @@ services:
     environment:
       APP_ENV: dev
 
-  pwa:
+  frontend:
     build:
       context: ./pwa
       target: api_platform_pwa_dev
     volumes:
       - ./pwa:/usr/src/pwa:rw,cached
-
-  caddy:
-    volumes:
-      - ./api/docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
-      - ./api/public:/srv/api/public:ro
-    environment:
-      MERCURE_EXTRA_DIRECTIVES: demo
 
 ###> doctrine/doctrine-bundle ###
   database:
@@ -32,6 +25,3 @@ services:
         published: 5432
         protocol: tcp
 ###< doctrine/doctrine-bundle ###
-
-###> symfony/mercure-bundle ###
-###< symfony/mercure-bundle ###

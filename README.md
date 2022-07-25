@@ -4,9 +4,18 @@ A sample PHP application powered by API Platform & Symfony
 
 ## Launching
 
+0. Docker
 1. Run database
 2. Backend (REST API, Docs)
 3. Frontend (Website, Admin)
+
+
+## With Docker
+
+```
+docker-compose build --pull --no-cache
+docker-compose up -d
+```
 
 ## Run database
 
