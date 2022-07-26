@@ -1,47 +1,21 @@
 version: "3.4"
 
 services:
-  backend:
-    build:
-      context: ./api
-      target: api_platform_php
-    depends_on:
-      - database
-    restart: unless-stopped
-    volumes:
-      - php_socket:/var/run/php
-    healthcheck:
-      interval: 10s
-      timeout: 3s
-      retries: 3
-      start_period: 30s
-    environment:
-      DATABASE_URL: postgresql://${POSTGRES_USER:-api-platform}:${POSTGRES_PASSWORD:-!ChangeMe!}@database:5432/${POSTGRES_DB:-api}?serverVersion=${POSTGRES_VERSION:-13}
-      TRUSTED_PROXIES: ${TRUSTED_PROXIES:-127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16}
-      TRUSTED_HOSTS: ^${SERVER_NAME:-example\.com|localhost}|caddy$$
-
-  frontend:
-    build:
-      context: ./pwa
-      target: api_platform_pwa_prod
-    environment:
-      API_PLATFORM_CLIENT_GENERATOR_ENTRYPOINT: http://caddy
-      NEXT_PUBLIC_ENTRYPOINT: http://caddy
-
   database:
-    image: postgres:${POSTGRES_VERSION:-13}-alpine
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
     environment:
-      - POSTGRES_DB=${POSTGRES_DB:-api}
-      # You should definitely change the password in production
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-!ChangeMe!}
-      - POSTGRES_USER=${POSTGRES_USER:-api-platform}
+      MYSQL_ROOT_PASSWORD: phppassword
+      MYSQL_USER: phpuser
+      MYSQL_PASSWORD: phppassword
+      MYSQL_DATABASE: symfony
     volumes:
-      - db_data:/var/lib/postgresql/data:rw
-      # you may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./api/docker/db/data:/var/lib/postgresql/data:rw
+      - db_data:/var/lib/mysql:rw
+    ports:
+      - target: 3306
+        published: 3306
+        protocol: tcp
 
 volumes:
-  php_socket:
-###> doctrine/doctrine-bundle ###
   db_data:
-###< doctrine/doctrine-bundle ###
